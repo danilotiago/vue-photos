@@ -2,7 +2,7 @@
   <div class="corpo">
 
     <h1 class="centralizado">{{ titulo }}</h1>
-
+    <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre pelo título da foto">
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto in fotos">
 
@@ -27,7 +27,8 @@ export default {
   data () {
     return {
       titulo: 'Alurapic',
-      fotos: []
+      fotos: [],
+      filtro: ''
     }
   },
   created() {
@@ -40,23 +41,25 @@ export default {
 </script>
 
 <style>
-.centralizado {
-  text-align: center;
-}
-.imagem-responsiva {
-  width: 100%;
-}
-.corpo {
-  font-family: Helvetica, sans-serif;
-  margin: 0 auto;
-  width: 96%;
-}
-
-.lista-fotos {
-  list-style: none;
-}
-
-.lista-fotos .lista-fotos-item {
-  display: inline-block;
-}
+  .centralizado {
+    text-align: center;
+  }
+  .imagem-responsiva {
+    width: 100%;
+  }
+  .corpo {
+    font-family: Helvetica, sans-serif;
+    margin: 0 auto;
+    width: 96%;
+  }
+  .lista-fotos {
+    list-style: none;
+  }
+  .lista-fotos .lista-fotos-item {
+    display: inline-block;
+  }
+  .filtro {
+    display: block;
+    width: 100%;
+  }
 </style>
