@@ -9,7 +9,12 @@
 </template>
 <script>
   export default {
-    props: ['routes']
+    props: {
+      routes: {
+        type: Array,
+        required: true
+      }
+    }
   }
 </script>
 <style>
