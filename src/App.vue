@@ -4,7 +4,7 @@
     <h1 class="centralizado">{{ titulo }}</h1>
     <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre pelo título da foto">
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto in fotos">
+      <li class="lista-fotos-item" v-for="foto in fotosComFiltro">
 
         <meu-painel :titulo="foto.titulo">
           <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
@@ -29,6 +29,17 @@ export default {
       titulo: 'Alurapic',
       fotos: [],
       filtro: ''
+    }
+  },
+  computed: {
+
+    fotosComFiltro() {
+      if (this.filtro) {
+        let exp = new RegExp(this.filtro.trim(), 'i') // cria a regex para o filtro
+        return this.fotos.filter(foto => exp.test(foto.titulo)) // efetua o filtro para cada foto
+      } else {
+        return this.fotos
+      }
     }
   },
   created() {
