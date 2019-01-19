@@ -1,16 +1,37 @@
 <template>
-  <button :type="tipo" class="botao botao-perigo" @click="executaAcao()">{{ nome }}</button>
+  <!-- teremos uma classe default chamada botao e o vue tambem adicionara uma classe computada pelo
+  metodo estiloBotao, logo, teremos duas chamadas de botao mas que serao "concatenadas" -->
+  <button :type="tipo" class="botao" :class="estiloBotao" @click="executaAcao()">{{ nome }}</button>
 </template>
 <script>
   export default {
-    props: ['tipo', 'nome'],
+    props: ['tipo', 'nome', 'confirmacao', 'estilo'],
+    computed: {
+      estiloBotao() {
+        switch (this.estilo) {
+          case 'padrao' : {
+            return 'botao-padrao'
+          } case 'perigo' : {
+            return 'botao-perigo'
+          } default : {
+            return 'botao-padrao'
+          }
+        }
+      }
+    },
     methods: {
       executaAcao() {
-        if (confirm('Confirmar exclusão ?')) {
-          // emite uma chamada para cima (para o component pai que usa este component)
-          // chamando o evento acaoPai
+
+        if (this.confirmacao) {
+          if (confirm('Confirmar exclusão ?')) {
+            // emite uma chamada para cima (para o component pai que usa este component)
+            // chamando o evento acaoPai
+            this.$emit('acaoPai')
+          }
+        } else {
           this.$emit('acaoPai')
         }
+
       }
     }
   }

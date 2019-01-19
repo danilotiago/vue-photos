@@ -10,7 +10,15 @@
 
           <!--foi criado um evento customizado que o elemento meu-botao chama pelo $emit,
           este evento chama a funcao remove(foto)-->
-          <meu-botao tipo="button" nome="Remover" @acaoPai="remove(foto)"></meu-botao>
+          <!--foi usado :confirmacao para o vue interpretar o valor false/true e enviar boolean para
+          o component, e nao a string false/true-->
+          <meu-botao
+            tipo="button"
+            nome="Remover"
+            :confirmacao="false"
+            estilo="perigo"
+            @acaoPai="remove(foto)"
+            ></meu-botao>
 
         </meu-painel>
 
