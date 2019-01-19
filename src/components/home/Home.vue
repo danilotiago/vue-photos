@@ -15,7 +15,7 @@
           <meu-botao
             tipo="button"
             nome="Remover"
-            :confirmacao="false"
+            :confirmacao="true"
             estilo="perigo"
             @acaoPai="remove(foto)"
             ></meu-botao>

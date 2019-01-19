@@ -5,7 +5,23 @@
 </template>
 <script>
   export default {
-    props: ['tipo', 'nome', 'confirmacao', 'estilo'],
+    props: {
+      tipo: {
+        required: true,
+        type: String
+      },
+      nome: {
+        required: true,
+        type: String
+      },
+      confirmacao: {
+        type: Boolean
+      },
+      estilo: {
+        type: String
+      }
+    },
+
     computed: {
       estiloBotao() {
         switch (this.estilo) {
@@ -19,6 +35,7 @@
         }
       }
     },
+
     methods: {
       executaAcao() {
 
