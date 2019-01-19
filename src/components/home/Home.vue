@@ -7,7 +7,14 @@
 
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
-          <meu-botao tipo="button" nome="Remover"></meu-botao>
+
+          <!-- como um component nao possui eventos, usamos o click.native pois o Vue
+          acessara o elemento que esta dentro do component (no caso, o elemento Button)
+          e chamara o evento de clique nativo do elemento button, com isso podemos executar
+          a funcao remove. Caso estivessemos com o elemento nativo direto neste component
+           nao precisariamos usar essa adaptacao, apenas chamariamos o @click-->
+          <meu-botao tipo="button" nome="Remover" @click.native="remove(foto)"></meu-botao>
+
         </meu-painel>
 
       </li>
@@ -34,6 +41,7 @@
         filtro: ''
       }
     },
+    // funcoes que precisam de reprocessamento
     computed: {
 
       fotosComFiltro() {
@@ -42,6 +50,14 @@
           return this.fotos.filter(foto => exp.test(foto.titulo)) // efetua o filtro para cada foto
         } else {
           return this.fotos
+        }
+      }
+    },
+    // funcoes que nao precisam de reprocessamento, apenas sao chamadas
+    methods: {
+      remove(foto) {
+        if (confirm('Remover a foto ' + foto.titulo)) {
+          alert('REMOVER')
         }
       }
     },
