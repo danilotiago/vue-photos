@@ -8,12 +8,9 @@
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
 
-          <!-- como um component nao possui eventos, usamos o click.native pois o Vue
-          acessara o elemento que esta dentro do component (no caso, o elemento Button)
-          e chamara o evento de clique nativo do elemento button, com isso podemos executar
-          a funcao remove. Caso estivessemos com o elemento nativo direto neste component
-           nao precisariamos usar essa adaptacao, apenas chamariamos o @click-->
-          <meu-botao tipo="button" nome="Remover" @click.native="remove(foto)"></meu-botao>
+          <!--foi criado um evento customizado que o elemento meu-botao chama pelo $emit,
+          este evento chama a funcao remove(foto)-->
+          <meu-botao tipo="button" nome="Remover" @acaoPai="remove(foto)"></meu-botao>
 
         </meu-painel>
 
@@ -56,9 +53,7 @@
     // funcoes que nao precisam de reprocessamento, apenas sao chamadas
     methods: {
       remove(foto) {
-        if (confirm('Remover a foto ' + foto.titulo)) {
-          alert('REMOVER')
-        }
+        alert('remover foto')
       }
     },
     created() {

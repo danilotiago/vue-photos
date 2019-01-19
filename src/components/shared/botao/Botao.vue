@@ -1,9 +1,18 @@
 <template>
-  <button :type="tipo" class="botao botao-perigo">{{ nome }}</button>
+  <button :type="tipo" class="botao botao-perigo" @click="executaAcao()">{{ nome }}</button>
 </template>
 <script>
   export default {
-    props: ['tipo', 'nome']
+    props: ['tipo', 'nome'],
+    methods: {
+      executaAcao() {
+        if (confirm('Confirmar exclusão ?')) {
+          // emite uma chamada para cima (para o component pai que usa este component)
+          // chamando o evento acaoPai
+          this.$emit('acaoPai')
+        }
+      }
+    }
   }
 </script>
 <style scoped>
