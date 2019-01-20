@@ -6,7 +6,7 @@
       <li class="lista-fotos-item" v-for="foto in fotosComFiltro">
 
         <meu-painel :titulo="foto.titulo">
-          <imagem-responsiva :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
+          <imagem-responsiva v-meu-rotate :url="foto.url" :titulo="foto.titulo"></imagem-responsiva>
 
           <!--foi criado um evento customizado que o elemento meu-botao chama pelo $emit,
           este evento chama a funcao remove(foto)-->
