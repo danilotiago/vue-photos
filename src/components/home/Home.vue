@@ -7,7 +7,10 @@
 
         <!--adicionamos o modificador animate na diretiva para caso quisermos
         o efeito animado, se nao quisermos eh so tirar o '.animate'
-        podemos ir adicionando modificadores aninhados com .xxx .yyy ... um apos o outro-->
+        podemos ir adicionando modificadores aninhados com .xxx .yyy ... um apos o outro.
+        v-meu-transform:rotate => o :rotate eh um argumento que pode ser passado
+        argumentos => ditam a logica
+        modificadores => ativam ou nao uma logica-->
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva
             :url="foto.url"
@@ -39,12 +42,16 @@
   import Painel from '../shared/painel/Painel.vue'
   import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
   import Botao from '../shared/botao/Botao'
+  import rotate from '../../directives/Rotate'
 
   export default {
     components: {
       'meu-painel': Painel,
       'imagem-responsiva': ImagemResponsiva,
       'meu-botao': Botao
+    },
+    directives: {
+      'meu-rotate': rotate
     },
     data () {
       return {
