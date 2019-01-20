@@ -5,8 +5,19 @@ Vue.directive('meu-rotate', {
 
     let current = 0
     el.addEventListener('dblclick', function () {
-      current+= 90
+      let incremento = 90
+      let animacao = false
+
+      if (binding.value) {
+        incremento = binding.value.incremento
+        animacao = binding.value.animacao
+      }
+
+      current+= incremento
+
       el.style.transform = `rotate(${current}deg)`
+
+      if (animacao) el.style.transition = 'transform 0.5s'
     })
   }
 })
