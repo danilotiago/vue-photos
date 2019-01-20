@@ -47,6 +47,7 @@
 <script>
   import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva'
   import Botao from '../shared/botao/Botao'
+  import Foto from '../../domain/foto/Foto'
 
   export default {
     components: {
@@ -55,22 +56,13 @@
     },
     data() {
       return {
-        foto: {
-          titulo: '',
-          url: '',
-          descricao: ''
-        }
+        foto: new Foto()
       }
     },
     methods: {
       grava() {
         console.log(this.foto)
-
-        this.foto = {
-          titulo: '',
-          url: '',
-          descricao: ''
-        }
+        this.foto = new Foto()
       }
     }
   }
