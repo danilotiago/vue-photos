@@ -1,28 +1,30 @@
 <template>
   <div>
     <h1 class="centralizado">Cadastro</h1>
-    <h2 class="centralizado"></h2>
+    <h2 class="centralizado">{{ foto.titulo }}</h2>
 
     <form @submit.prevent="grava()">
       <div class="controle">
         <label for="titulo">TÍTULO</label>
+        <!-- modificador lazy serve para fazer o data binding do dado apenas quando
+        o usuario sair do campo -->
         <input
           id="titulo"
           autocomplete="off"
-          @input="foto.titulo = $event.target.value"
-          :value="foto.titulo"
+          v-model.lazy="foto.titulo"
         >
       </div>
 
+      <!-- modificador lazy serve para fazer o data binding do dado apenas quando
+      o usuario sair do campo -->
       <div class="controle">
         <label for="url">URL</label>
         <input
           id="url"
           autocomplete="off"
-          @input="foto.url = $event.target.value"
-          :value="foto.url"
+          v-model.lazy="foto.url"
         >
-        <imagem-responsiva/>
+        <imagem-responsiva v-show="foto.url" :url="foto.url" :titulo="foto.titulo"/>
       </div>
 
       <div class="controle">
@@ -30,8 +32,7 @@
         <textarea
           id="descricao"
           autocomplete="off"
-          @input="foto.descricao = $event.target.value"
-          :value="foto.descricao"
+          v-model="foto.descricao"
         ></textarea>
       </div>
 
