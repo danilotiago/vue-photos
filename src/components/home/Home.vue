@@ -5,11 +5,14 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto in fotosComFiltro">
 
+        <!--adicionamos o modificador animate na diretiva para caso quisermos
+        o efeito animado, se nao quisermos eh so tirar o '.animate'
+        podemos ir adicionando modificadores aninhados com .xxx .yyy ... um apos o outro-->
         <meu-painel :titulo="foto.titulo">
           <imagem-responsiva
             :url="foto.url"
             :titulo="foto.titulo"
-            v-meu-rotate="{incremento: 90, animacao: true}"
+            v-meu-rotate.animate="25"
           ></imagem-responsiva>
 
           <!--foi criado um evento customizado que o elemento meu-botao chama pelo $emit,
