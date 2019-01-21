@@ -77,8 +77,10 @@
     // funcoes que nao precisam de reprocessamento, apenas sao chamadas
     methods: {
       remove(foto) {
-        this.$http
-          .delete(`v1/fotos/${foto._id}`)
+
+        // usando o resource como delete
+        this.resource
+          .delete({id: foto._id})
           .then(
             () => {
 
@@ -92,13 +94,44 @@
               this.mensagem = 'Não foi possível remover a foto'
             }
           )
+
+        // chamada tradicional
+        /*this.$http
+          .delete(`v1/fotos/${foto._id}`)
+          .then(
+            () => {
+
+              // remove a foto do array atual
+              let indice = this.fotos.indexOf(foto)
+              this.fotos.splice(indice, 1)
+              this.mensagem = 'Foto removida'
+
+            }, err => {
+              console.log(err)
+              this.mensagem = 'Não foi possível remover a foto'
+            }
+          )*/
       }
     },
     created() {
-      this.$http
-        .get('v1/fotos')
+
+      // usando resource por ser expecialista em API's REST
+      // {/id} => eh o parametro que passamos na URL e ele eh opcional
+      // quem chamar o resource podera passar um valor para a chave id
+      // deve ser definido dentro do metodo created para uso do this.
+      this.resource = this.$resource('v1/fotos{/id}')
+
+      // usando o resource como get => query
+      this.resource
+        .query()
         .then(res => res.json())
         .then(fotos => this.fotos = fotos, err => console.log(err))
+
+      // chamada tradicional
+      /*this.$http
+        .get('v1/fotos')
+        .then(res => res.json())
+        .then(fotos => this.fotos = fotos, err => console.log(err))*/
     }
   }
 </script>

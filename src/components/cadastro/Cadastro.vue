@@ -59,14 +59,29 @@
         foto: new Foto()
       }
     },
+    created() {
+      // usando resource por ser expecialista em API's REST
+      // neste caso nao definimos parametros pois aqui so se faz post
+      // deve ser definido dentro do metodo created para uso do this.
+      this.resource = this.$resource('v1/fotos')
+    },
     methods: {
       grava() {
-        this.$http
-          .post('v1/fotos', this.foto)
+        // usando resource save => post
+        this.resource
+          .save(this.foto)
           .then(
             () => this.foto = new Foto(),
             err => console.log(err)
           )
+
+        // chamada tradicional
+        /*this.$http
+          .post('v1/fotos', this.foto)
+          .then(
+            () => this.foto = new Foto(),
+            err => console.log(err)
+          )*/
       }
     }
   }

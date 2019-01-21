@@ -10,7 +10,7 @@ import { routes } from './routes'
 
 Vue.use(VueResource)
 // setamos o dominio do backend que sera usado implicitamente
-// em cada chamada para API 
+// em cada chamada para API
 Vue.http.options.root = 'http://localhost:3000'
 
 Vue.use(VueRouter)
