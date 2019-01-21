@@ -9,6 +9,10 @@ import { routes } from './routes'
 //import './directives/Rotate'
 
 Vue.use(VueResource)
+// setamos o dominio do backend que sera usado implicitamente
+// em cada chamada para API 
+Vue.http.options.root = 'http://localhost:3000'
+
 Vue.use(VueRouter)
 
 // configuramos o roteador que recebe um objeto de rotas
