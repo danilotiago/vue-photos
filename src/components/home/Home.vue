@@ -44,6 +44,7 @@
   import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue'
   import Botao from '../shared/botao/Botao'
   import rotate from '../../directives/Rotate'
+  import FotoService from '../../domain/foto/FotoService'
 
   export default {
     components: {
@@ -78,8 +79,21 @@
     methods: {
       remove(foto) {
 
+        this.service
+          .apaga(foto._id)
+          .then(() => {
+            // remove a foto do array atual
+            let indice = this.fotos.indexOf(foto)
+            this.fotos.splice(indice, 1)
+            this.mensagem = 'Foto removida'
+          }, err => {
+            console.log(err)
+            this.mensagem = 'Não foi possível remover a foto'
+          })
+
+
         // usando o resource como delete
-        this.resource
+        /*this.resource
           .delete({id: foto._id})
           .then(
             () => {
@@ -93,7 +107,7 @@
               console.log(err)
               this.mensagem = 'Não foi possível remover a foto'
             }
-          )
+          )*/
 
         // chamada tradicional
         /*this.$http
@@ -115,17 +129,23 @@
     },
     created() {
 
+      this.service = new FotoService(this.$resource)
+
+      this.service
+        .lista()
+        .then(fotos => this.fotos = fotos, err => console.log(err))
+
       // usando resource por ser expecialista em API's REST
       // {/id} => eh o parametro que passamos na URL e ele eh opcional
       // quem chamar o resource podera passar um valor para a chave id
       // deve ser definido dentro do metodo created para uso do this.
-      this.resource = this.$resource('v1/fotos{/id}')
+      //this.resource = this.$resource('v1/fotos{/id}')
 
       // usando o resource como get => query
-      this.resource
+      /*this.resource
         .query()
         .then(res => res.json())
-        .then(fotos => this.fotos = fotos, err => console.log(err))
+        .then(fotos => this.fotos = fotos, err => console.log(err))*/
 
       // chamada tradicional
       /*this.$http

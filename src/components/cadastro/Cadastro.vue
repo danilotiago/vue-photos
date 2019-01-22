@@ -48,6 +48,7 @@
   import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva'
   import Botao from '../shared/botao/Botao'
   import Foto from '../../domain/foto/Foto'
+  import FotoService from "../../domain/foto/FotoService";
 
   export default {
     components: {
@@ -60,20 +61,30 @@
       }
     },
     created() {
+      this.service = new FotoService(this.$resource)
+
       // usando resource por ser expecialista em API's REST
       // neste caso nao definimos parametros pois aqui so se faz post
       // deve ser definido dentro do metodo created para uso do this.
-      this.resource = this.$resource('v1/fotos')
+      //this.resource = this.$resource('v1/fotos')
     },
     methods: {
       grava() {
-        // usando resource save => post
-        this.resource
-          .save(this.foto)
+
+        this.service
+          .cadastra(this.foto)
           .then(
             () => this.foto = new Foto(),
             err => console.log(err)
           )
+
+        // usando resource save => post
+        /*this.resource
+          .save(this.foto)
+          .then(
+            () => this.foto = new Foto(),
+            err => console.log(err)
+          )*/
 
         // chamada tradicional
         /*this.$http
